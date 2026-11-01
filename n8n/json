@@ -1,0 +1,578 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-haiku-5-5",
+          "mode": "list",
+          "cachedResultName": "Claude Haiku 5.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        -560,
+        -32
+      ],
+      "id": "e3f810ba-616b-49ad-9b5d-e43187f789b0",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.message }}",
+        "options": {
+          "systemMessage": "=את \"מאיה\", העוזרת הדיגיטלית של סטודיו הכושר \"כוח\" בתל אביב.\nהתאריך היום: {{ $today.toFormat('yyyy-MM-dd') }}\n\n# תפקיד\nלענות למתאמנים ולמתעניינים על שיעורים, מנויים ושעות פעילות, ולעזור להם לבחור שיעור שמתאים להם.\nאת מנהלת השיחה: מדברת עם הלקוח ומחליטה איזה סוכן יבצע כל משימה. את לא מבצעת משימות בעצמך.\n\n# מידע על הסטודיו\n- שעות פעילות: א'–ה' 06:00–22:00, ו' 07:00–14:00, שבת סגור.\n- שיעורים: פילאטיס, יוגה, HIIT, אימון כוח.\n- שיעור ניסיון ראשון – ללא עלות.\n\n# חלוקת משימות\n- שאלות כלליות (שיעורים, שעות, שיעור ניסיון): עני בעצמך, רק לפי המידע שלמעלה.\n- קביעת שיעור או בדיקת מקום פנוי: העבירי ל-agent_cal.\n- שליחת מייל ללקוח (סיכום, אישור, מידע נוסף): העבירי ל-agent_email.\n- לעולם אל תאשרי ללקוח ששיעור נקבע או שמייל נשלח, לפני שהסוכן המתאים החזיר שהפעולה הצליחה.\n- אל תנחשי תוצאה של פעולה. אם הסוכן לא הצליח, אמרי זאת ללקוח בכנות.\n\n# לפני שמעבירים משימה לסוכן\nהסוכנים לא רואים את השיחה. לכן העבירי להם את כל הפרטים במשימה עצמה:\n- ל-agent_cal: שם הלקוח, סוג השיעור, תאריך (YYYY-MM-DD) ושעה (HH:mm).\n- ל-agent_email: שם הלקוח, כתובת המייל, ומה צריך להיות בתוכן המייל.\nאם חסר פרט, שאלי את הלקוח לפני שמעבירים.\n\n# כללים\n1. עני תמיד בעברית, בגוף שני, בטון חם ומעודד.\n2. אם המשתמש אמר את שמו – פני אליו בשמו.\n3. אל תמציאי מחירים או מידע שלא מופיע כאן. אם אין מידע – הציעי לפנות לסטודיו.\n4. אל תתני ייעוץ רפואי. על כאבים או פציעה – המליצי להתייעץ עם רופא.\n\n# פורמט\nעד 4 משפטים. סיימי בשאלה שמקדמת את השיחה.\n\n# תיעוד\nכל הודעה נכנסת וכל תשובה שלך חייבות להיות מתועדות בעזרת הכלי chat_log."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -368,
+        -240
+      ],
+      "id": "064eaf84-2a8a-4c80-a9fa-727eb5c0afd0",
+      "name": "ceo"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 100
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -224,
+        144
+      ],
+      "id": "f022b852-ba08-45fc-9534-07d8b25cd973",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-haiku-5-5",
+          "mode": "list",
+          "cachedResultName": "Claude Haiku 5.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        -320,
+        144
+      ],
+      "id": "5703930f-ff84-4fd7-9a9f-b8c8fba16cd7",
+      "name": "Anthropic Chat Model1",
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Vg8JXfLQ2WqTd-3XZXd9T6mh5DzzhxjwXhUqyX_mPGg",
+          "mode": "list",
+          "cachedResultName": "מאיה",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Vg8JXfLQ2WqTd-3XZXd9T6mh5DzzhxjwXhUqyX_mPGg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1743830204,
+          "mode": "list",
+          "cachedResultName": "אימוני כח",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Vg8JXfLQ2WqTd-3XZXd9T6mh5DzzhxjwXhUqyX_mPGg/edit#gid=1743830204"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $now }}",
+            "user_message": "={{ $('Webhook').item.json.body.message }}",
+            "agent_reply": "={{ $json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "user_message",
+              "displayName": "user_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "agent_reply",
+              "displayName": "agent_reply",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        -240
+      ],
+      "id": "b745fa16-45a6-43c1-b1a5-aeb8018ecdd7",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZY4DK7MKyJb2kZeF",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"reply\": {{ JSON.stringify($('ceo').item.json.output) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        144,
+        -240
+      ],
+      "id": "bd181d02-5ee1-4a20-bf53-be99efca8daf",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "toolDescription": "סוכן היומן. בודק מקום פנוי וקובע שיעורים ביומן.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "=את סוכנת היומן של סטודיו הכושר \"כוח\".\nהתאריך היום: {{ $today.toFormat('yyyy-MM-dd') }}\n\n1. בדקי בכלי check_free כמה שיעורים מאותו סוג קבועים באותו תאריך ושעה.\n2. אם יש 2 – אל תקבעי. החזירי שהשעה מלאה.\n3. אם יש פחות מ-2 – קבעי בכלי app.\n4. כותרת האירוע: \"[סוג השיעור] - [שם הלקוח]\".\n5. משך שיעור: 60 דקות.\n\nהחזירי משפט אחד: נקבע, או שהשעה מלאה."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -224,
+        -32
+      ],
+      "id": "44cea39d-64a5-4cb7-b8a5-65f55b6c3915",
+      "name": "agent_cal"
+    },
+    {
+      "parameters": {
+        "toolDescription": "סוכן המיילים. כותב ושולח מייל ללקוח, אחרי אישור של בעל הסטודיו.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "את סוכנת המיילים של סטודיו הכושר \"כוח\".\n\n1. כתבי מייל קצר וחם בעברית, בשם \"מאיה מסטודיו כוח\".\n2. פני ללקוח בשמו.\n3. השתמשי רק במידע שקיבלת. אל תמציאי מחירים, תאריכים או הבטחות.\n4. שלחי את המייל בכלי send_client_email.\n\nהחזירי משפט אחד: המייל נשלח, או שהשליחה לא אושרה.\nמשפט אחד: האם המייל נשלח, או שהשליחה לא אושרה."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        256,
+        -96
+      ],
+      "id": "dab18ef8-4c30-4e64-a6bb-9f7ec1164ccb",
+      "name": "agent_email "
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        368,
+        144
+      ],
+      "id": "70efba61-add4-4061-8588-8208fbe48651",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-haiku-5-5",
+          "mode": "list",
+          "cachedResultName": "Claude Haiku 5.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.6,
+      "position": [
+        256,
+        128
+      ],
+      "id": "45230cf9-a3d6-45d1-b00f-96ace169cf45",
+      "name": "Anthropic Chat Model2",
+      "credentials": {
+        "anthropicApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mybot",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        -560,
+        -240
+      ],
+      "id": "b95c9375-afd0-4814-bceb-6bfab3c31bee",
+      "name": "Webhook",
+      "webhookId": "b8f6d26c-ee76-4bf2-916c-80301018c565"
+    },
+    {
+      "parameters": {
+        "sendTo": "tilahunlp@gmail.com",
+        "subject": "מאיה מבקשת אישור לשליחת מייל ללקוח",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "אשר",
+            "disapproveLabel": "דחה"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailHitlTool",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        48
+      ],
+      "id": "b1b1eff0-b301-427e-a8c5-28a156913fc2",
+      "name": "Gmail",
+      "webhookId": "49342bcf-b5bd-417e-b5ea-961865e31ddc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "emGfwYW8x7skcbt6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        208
+      ],
+      "id": "b459b031-ce62-4b9e-a44a-727f1740c5c5",
+      "name": "Send a message in Gmail",
+      "webhookId": "ec562ebf-422e-4359-bffd-e8f4dc94d482",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "emGfwYW8x7skcbt6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        688,
+        -192
+      ],
+      "id": "b27f5bd1-f6b1-416e-9f78-59d1afd4fcc7",
+      "name": "When chat message received",
+      "webhookId": "9480b496-0e01-4936-aeb7-c0b47a0b6000"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "02fc743b255997959b2b2c7c47cc22dbe7d2b36f8d08299a59ca7400be9b1896@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "מאיה סטודיו "
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        144
+      ],
+      "id": "a802c296-85d5-4465-b0b7-8a8638db2ef6",
+      "name": "app",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "sR4Vz1Dwgo4HX8zw",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "02fc743b255997959b2b2c7c47cc22dbe7d2b36f8d08299a59ca7400be9b1896@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "מאיה סטודיו "
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        48,
+        128
+      ],
+      "id": "9cdf5d4d-e9eb-4762-b657-d75328a5eb66",
+      "name": "check_free",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "sR4Vz1Dwgo4HX8zw",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId || $json.body?.sessionId || 'test-session' }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -368,
+        -32
+      ],
+      "id": "77fdf468-c763-4888-9e65-4f41f57b97d1",
+      "name": "Simple Memory"
+    }
+  ],
+  "connections": {
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "ceo",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ceo": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "agent_cal",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "agent_cal",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent_cal": {
+      "ai_tool": [
+        [
+          {
+            "node": "ceo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agent_email ": {
+      "ai_tool": [
+        [
+          {
+            "node": "ceo",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "agent_email ",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "agent_email ",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "ceo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "agent_email ",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "app": {
+      "ai_tool": [
+        [
+          {
+            "node": "agent_cal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_free": {
+      "ai_tool": [
+        [
+          {
+            "node": "agent_cal",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "ceo",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "216b983bd202163dd5412a9c846837e8be4bdc8f52eee55bb8de131e2cabbff7"
+  }
+}
